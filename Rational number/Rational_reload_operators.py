@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# 有理数类重载运算符版
 
 
 class Rational:

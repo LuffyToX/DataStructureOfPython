@@ -17,6 +17,7 @@ class LNode:
 
 class LList:
     def __init__(self):
+        """ 构造空表 """
         # 表头指针  ==>  保存着这个表的首结点的引用
         # 创建空表  ==>  将表头指针设置为空链接  ==>  O(1)
         self._head = None
@@ -252,4 +253,6 @@ if __name__ == "__main__":
     llist.prepend(3)
     llist.prepend(2)
     llist.prepend(1)
+    llist.travel()
+    llist.del_last()
     llist.travel()

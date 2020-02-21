@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# 有理数类
 
 
 class Rational:

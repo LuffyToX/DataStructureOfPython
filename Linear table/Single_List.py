@@ -92,7 +92,7 @@ class LList:
             return
 
         pre = self._head
-        while pre is not None and i > 1:
+        while i > 1:
             i -= 1
             pre = pre.next
 
@@ -105,7 +105,7 @@ class LList:
 
     def del_first(self):
         """
-        删除表头结点，并返回表首元素  ==>
+        删除表头结点，并返回其元素  ==>
 
         O(1)
                                         1. 如果是空表，抛出异常
@@ -122,7 +122,7 @@ class LList:
 
     def del_last(self):
         """
-        删除表尾结点，并返回表尾元素  ==>
+        删除表尾结点，并返回其元素  ==>
 
         O(n)
                                         1. 如果是空表，抛出异常
@@ -135,7 +135,7 @@ class LList:
             raise ValueError
 
         pre = self._head
-        while pre.next.next is not None:   # 循环结束  =>  p 是尾结点的前一个结点
+        while pre.next.next is not None:   # 循环结束  =>  pre 是尾结点的前一个结点
             pre = pre.next
         val = pre.next.elem                # 保存表尾元素
         pre.next = None
@@ -168,7 +168,7 @@ class LList:
             return
 
         pre = self._head
-        while pre is not None and i > 1:  # 循环结束  ==>  pre 是目标结点的前一结点
+        while i > 1:          # 循环结束  ==>  pre 是目标结点的前一结点
             i -= 1
             pre = pre.next
 
@@ -188,14 +188,14 @@ class LList:
             raise ValueError
 
         p = self._head
-        while p is not None and i > 0:  # 循环结束  ==>  p 是目标结点
+        while i > 0:           # 循环结束  ==>  p 是目标结点
             i -= 1
             p = p.next
         return p
 
     def search_elem(self, elem):
         """
-        按元素定位  ==>  确定元素 elem 所在结点的下标 """
+        按元素定位  ==>  确定元素 elem 所在结点的下标  ==>  O(n) """
 
         # 空表  ==>  抛出 ValueError
         if self.is_empty():
@@ -248,11 +248,10 @@ class LList:
 
 if __name__ == "__main__":
     llist = LList()
+    llist.prepend(6)
     llist.prepend(5)
     llist.prepend(4)
     llist.prepend(3)
     llist.prepend(2)
     llist.prepend(1)
-    llist.travel()
-    llist.del_last()
     llist.travel()

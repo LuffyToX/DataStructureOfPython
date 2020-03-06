@@ -1,18 +1,23 @@
 # -*- coding: utf-8 -*-
-# <添加尾指针的单链表>
-# 单链表有一个缺点：尾端加入元素操作的效率低（只能从表头开始查找）
-# 对表对象增加一个表尾结点引用域，有了这个引用域，只需常量时间就能找到尾结点
+# <双链表>
+# 两端的插入和删除操作都能在 O(1) 时间内完成
+# 每个结点都需要增加一个链接域，增加的空间开销与结点数成正比，O(n)
+# 从双链表中任一结点出发，可以直接找到其前后的相邻结点， O(1)
 
 
-class LNode:
-    def __init__(self, elem, next_=None):
+class DLNode:
+    """ 双链表结点类 """
+    def __init__(self, elem, prev_=None, next_=None):
+        # 双链表的结点类是一个三元组：(elem, prev, next)
         # elem：保存作为表元素的数据项
+        # prev：保存上一个结点的标识
         # next：保存下一个结点的标识
         self.elem = elem
+        self.prev = prev_
         self.next = next_
 
 
-class LListAddLast:
+class DLList:
     def __init__(self):
         """ 构造空表 """
 
@@ -24,7 +29,7 @@ class LListAddLast:
 
     def is_empty(self):
         """
-        判空  ==>  O(1)  ==>  链表一般不会满，除非程序用完了可用的存储空间 """
+        判空  ==>  O(1) """
 
         # 表头/表尾 指针的值是空链接 (None)  ==>  空表
         return self._head is None
@@ -34,10 +39,13 @@ class LListAddLast:
         头插  ==>  O(1) """
 
         # 创建新结点，并将其后继指向头指针
-        p = LNode(elem, self._head)
+        p = DLNode(elem, None, self._head)
         if self.is_empty():
             # 空表  ==>  表尾指针指向新结点
             self._rear = p
+        else:
+            # 非空  ==>  不需要修改表尾指针
+            p.next.prev = p
         # 表头指针指向新结点
         self._head = p
 
@@ -45,13 +53,15 @@ class LListAddLast:
         """
         尾插  ==>  O(1) """
 
-        # 创建新结点，并将尾指针的后继指向该结点
-        p = LNode(elem)
-        self._rear.next = p
+        # 创建新结点，并将其前驱指向尾指针
+        p = DLNode(elem, self._rear, None)
         if self.is_empty():
-            # 空表  ==>  表头指针指向新结点
+            # 空表  ==>  头指针指向新结点
             self._head = p
-        # 尾指针指向新结点
+        else:
+            # 非空  ==>  不需要修改头指针
+            p.prev.next = p
+        # 表尾指针指向新结点
         self._rear = p
 
     def insert_(self, elem, i):
@@ -72,16 +82,16 @@ class LListAddLast:
             self.append_(elem)
             return
 
+        # 以下代码不能处理只有一个结点的情形
+        # 但是如果只有一个结点代码运行不到此处
+        # 头插/尾插均可以处理只有一个结点的情形
         pre = self._head
         while i > 1:          # 循环结束  ==>  pre 指向目标结点的前一结点
             i -= 1
             pre = pre.next
-
-        # 此三步不能处理空表的情形
-        # 不能处理 头插/尾插 的情形
-        # pre.next = LNode(elem, pre.next)
-        q = LNode(elem)
-        q.next = pre.next
+        # 创建新结点，并将其前驱指向 pre、后继指向 pre.next
+        q = DLNode(elem, pre, pre.next)
+        pre.next.prev = q
         pre.next = q
 
     def del_first(self):
@@ -92,40 +102,37 @@ class LListAddLast:
         if self.is_empty():
             raise ValueError
 
-        val = self._head.elem               # 保存表首元素
-        self._head = self._head.next        # 将头指针指向第二个结点
+        val = self._head.elem          # 保存表首元素
+        self._head = self._head.next   # 将头指针指向第二个结点
         if self._head is None:
             # 只有一个结点，尾指针要指向 None
             self._rear = None
+        else:
+            # 不止一个结点，将原第二个结点的前驱指向 None
+            self._head.prev = None
         return val
 
     def del_last(self):
         """
-        删除表尾结点，并返回其元素  ==>  O(n) """
+        删除表尾结点，并返回其元素  ==>  O(1) """
 
         # 空表  ==>  抛出 ValueError
         if self.is_empty():
             raise ValueError
 
-        # 只有一个元素
-        if len(self) == 1:
-            val = self._head.elem
+        val = self._rear.elem           # 保存表尾元素
+        self._rear = self._rear.prev    # 将尾指针指向倒数第二个结点
+        if self._rear is None:
+            # 只有一个元素，头指针要指向 None
             self._head = None
-            self._rear = self._head
-            return val
-
-        # 不止一个元素
-        val = self._rear.elem
-        pre = self._head
-        while pre.next.next is not None:   # 循环结束  =>  pre 是尾结点的前一个结点
-            pre = pre.next
-        pre.next = None                    # 不要忘记把原尾结点置 None
-        self._rear = pre
+        else:
+            # 不止一个结点，将原倒数第二个结点的后继指向 None
+            self._rear.next = None
         return val
 
     def del_all(self):
         """
-        删除链表 ==> O(1) ==> 将表头指针赋值为 None (解释器的存储管理系统会自动回收不用的内存) """
+        删除链表 ==> O(1) ==> 将表头指针指向 None """
 
         self._head = None
 
@@ -148,14 +155,15 @@ class LListAddLast:
             return
 
         pre = self._head
-        while i > 1:             # 循环结束  ==>  pre 指向目标结点的前一结点
+        while i > 1:                # 循环结束  ==>  pre 指向目标结点的前一结点
             i -= 1
             pre = pre.next
-        pre.next = pre.next.next
+        pre.next = pre.next.next    # 修改目标结点前驱结点的 next 域
+        pre.next.prev = pre         # 修改目标结点后继结点的 prev 域
 
     def search_i(self, i):
         """
-        按下标定位（改）  ==>  确定第 i 个元素所在结点  ==>  O(n) 尾结点可以达到 O(1) """
+        按下标定位  ==>  确定第 i 个元素所在结点  ==>  O(n) 尾结点可以达到 O(1) """
 
         # 下标合法性检查（注意这里要 -1）
         if i < 0 or i > len(self)-1:
@@ -213,7 +221,7 @@ class LListAddLast:
         while p is not None:
             print(p.elem, end='')
             if p.next is not None:  # p 不是尾结点
-                print(' --> ', end='')
+                print(' <--> ', end='')
             p = p.next
         print('')
 
@@ -228,11 +236,11 @@ class LListAddLast:
 
 
 if __name__ == "__main__":
-    llist = LListAddLast()
-    llist.prepend(6)
-    llist.prepend(5)
-    llist.prepend(4)
-    llist.prepend(3)
-    llist.prepend(2)
-    llist.prepend(1)
-    llist.travel()
+    dllist = DLList()
+    dllist.prepend(6)
+    dllist.prepend(5)
+    dllist.prepend(4)
+    dllist.prepend(3)
+    dllist.prepend(2)
+    dllist.prepend(1)
+    dllist.travel()

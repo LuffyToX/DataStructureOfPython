@@ -78,7 +78,7 @@ class LList:
                             4. 修改 pre 的 next 域，使之指向新结点
         """
         # 下标合法性检查
-        if i < 0 or i > self.length():
+        if i < 0 or i > len(self):
             raise IndexError
 
         # 空表  ==>  表头指针直接指向新结点即可
@@ -155,7 +155,7 @@ class LList:
                              2. 修改 pre 的 next 域，使之指向目标结点的下一结点
         """
         # 下标合法性检查（注意，这里要 -1）
-        if i < 0 or i > self.length()-1:
+        if i < 0 or i > len(self)-1:
             raise IndexError
 
         # 空表  ==>  抛出 ValueError
@@ -180,7 +180,7 @@ class LList:
         按下标定位  ==>  确定第 i 个元素所在结点  ==>  O(n) """
 
         # 下标合法性检查（注意这里要 -1）
-        if i < 0 or i > self.length()-1:
+        if i < 0 or i > len(self)-1:
             raise IndexError
 
         # 空表  ==>  抛出 ValueError
@@ -214,7 +214,7 @@ class LList:
         else:
             raise ValueError
 
-    def length(self):
+    def __len__(self):
         """
         表长  ==>  O(n) """
 

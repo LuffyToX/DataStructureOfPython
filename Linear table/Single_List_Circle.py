@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# 循环单链表
+# <循环单链表>
 # 最后一个结点的 next 域不是 None，而是指向表的第一个结点
 # 表头指针  ==>  表头插入 O(1)、表头删除 O(1)、表尾插入 O(n)、表尾删除 O(n)
 # 表尾指针  ==>  表头插入 O(1)、表头删除 O(1)、表尾插入 O(1)、表尾删除 O(n)  ==>  更好
@@ -56,7 +56,7 @@ class LListCircle:
         一般位置的插入  ==>  O(n) """
 
         # 下标合法性检查
-        if i < 0 or i > self.length():
+        if i < 0 or i > len(self):
             raise IndexError
 
         # 空表  =>  建立一个循环
@@ -72,7 +72,7 @@ class LListCircle:
             return
 
         # 尾插
-        if i == self.length():
+        if i == len(self):
             self.append_(elem)
             return
 
@@ -126,7 +126,7 @@ class LListCircle:
         一般位置的删除  ==>  O(n) """
 
         # 下标合法性检查（注意，这里要 -1）
-        if i < 0 or i > self.length()-1:
+        if i < 0 or i > len(self)-1:
             raise IndexError
 
         # 空表  ==>  抛出 ValueError
@@ -139,7 +139,7 @@ class LListCircle:
             return
 
         # 尾删
-        if i == self.length()-1:
+        if i == len(self)-1:
             self.del_last()
             return
 
@@ -154,7 +154,7 @@ class LListCircle:
         按下标定位  ==>  确定第 i 个元素所在结点  ==>  O(n) """
 
         # 下标合法性检查（注意这里要 -1）
-        if i < 0 or i > self.length()-1:
+        if i < 0 or i > len(self)-1:
             raise IndexError
 
         # 空表  ==>  抛出 ValueError
@@ -183,14 +183,14 @@ class LListCircle:
         while p.elem != elem:
             p = p.next
             i = i + 1
-            if i > self.length()-1:
+            if i > len(self)-1:
                 break
-        if i < self.length():
+        if i < len(self):
             return i
         else:
             raise ValueError
 
-    def length(self):
+    def __len__(self):
         """
         表长  ==>  O(n) """
 

@@ -49,8 +49,6 @@ def KMPMatching(t, p, pnext):
 
 
 if __name__ == "__main__":
-    t_str = "abcdefghi"
-    p_str = "ghi"
-    print(KMPMatching(t_str, p_str, genPnextEnhancement(p_str)))
-
+   p_str = "ABABAAABABAA"
+   print(genPnext(p_str))
 

@@ -45,14 +45,13 @@ class LListAddLast:
         """
         尾插  ==>  O(1) """
 
-        # 创建新结点，并将尾指针的后继指向该结点
-        p = LNode(elem)
-        self._rear.next = p
         if self.is_empty():
-            # 空表  ==>  表头指针指向新结点
-            self._head = p
-        # 尾指针指向新结点
-        self._rear = p
+            # 空表  ==>  表头/尾指针指向新结点
+            self._head = LNode(elem, self._head)
+            self._rear = self._head
+        else:
+            self._rear.next = LNode(elem)
+            self._rear = self._rear.next
 
     def insert_(self, elem, i):
         """

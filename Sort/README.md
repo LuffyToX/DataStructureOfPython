@@ -236,7 +236,7 @@
 
 假设现在考虑一段记录，取出其中第一个记录作为标准，设其为 $R$。由于对大小记录的安排，划分中的一般状态如下图 $a)$ 所示（已知的小记录积累在左边，大记录积累在右边，中间是尚未检查的记录）
 
-![图](https://img-blog.csdnimg.cn/20200328171543658.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjY0Nzc3,size_16,color_FFFFFF,t_70)
+<img src='https://img-blog.csdnimg.cn/20200328171543658.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjY0Nzc3,size_16,color_FFFFFF,t_70' align='left' style=' width:600px;height:100 px'/>
 
 为了完成划分，还需要利用好表中空位。取出记录 $R$ 使表左边出现了一个空位，如图  $b)$，这时从右端开始检查，就可以利用这个空位，把发现的第一个小记录移到左边。这一迁移操作也导致右边留下一个空位，如图 $c)$，可供存放在左边发现的一个大记录
 
@@ -347,4 +347,3 @@
 | 快速排序     | $O(n^2)$       | $O(nlogn)$     | $O(nlogn)$     | $O(logn)$  | ×      | ×      |
 | 归并排序     | $O(nlogn)$     | $O(nlogn)$     | $O(nlogn)$     | $O(n)$     | √      | ×      |
 | 蒂姆排序     | $O(nlogn)$     | $O(nlogn)$     | $O(n)$         | $O(n)$     | √      | √      |
-

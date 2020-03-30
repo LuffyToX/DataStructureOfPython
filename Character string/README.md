@@ -152,7 +152,7 @@ $$
 + 在状态 (2)：顺序比较，第一对字符不同，将模式串右移 1 位得到状态 (3)；
 + 在状态 (3)：顺序比较，模式串的 5 个字符都与目标串字符相同，找到了一个匹配
 
-![1](https://img-blog.csdnimg.cn/20200311205736119.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjY0Nzc3,size_16,color_FFFFFF,t_70)
+<img src='https://img-blog.csdnimg.cn/20200311205736119.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjY0Nzc3,size_16,color_FFFFFF,t_70' align='left' style=' width:600px;height:100 px'/>
 
 **图 朴素串匹配**
 
@@ -226,7 +226,7 @@ KMP 算法：
 + 接下来从模式串的 b 继续匹配，找到了一个成功匹配
 + 在这个过程中未出现重新检查目标串前面字符的情况（无回溯）
 
-![1](https://img-blog.csdnimg.cn/20200311204949878.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjY0Nzc3,size_16,color_FFFFFF,t_70)
+<img src='https://img-blog.csdnimg.cn/20200311204949878.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjY0Nzc3,size_16,color_FFFFFF,t_70' align='left' style=' width:600px;height:100 px'/>
 
 **图 朴素匹配与KMP匹配过程**
 
@@ -287,7 +287,7 @@ def KMPMatching(t, p, pnext):
 
 如果  $p_0p_1\cdot\cdot\cdot p_{i-1}$ 的最长相等前后缀的长度为 $k(0\leq k<{i-1})$，在 $p_i\neq t_j$ 时，模式串就应该右移 $i-k$ 位，也就是说，应该把 $pnext[i]$ 设置为 $k$
 
-![1](https://img-blog.csdnimg.cn/20200311204523952.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjY0Nzc3,size_16,color_FFFFFF,t_70)
+<img src='https://img-blog.csdnimg.cn/20200311204523952.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjY0Nzc3,size_16,color_FFFFFF,t_70' align='left' style=' width:600px;height:100 px'/>
 
 **图 pnext的分析与构造**
 
@@ -353,60 +353,3 @@ def genPnextEnhancement(p):
 注意，许多场景中需要用一个模式串反复在一个或多个目标串里匹配，在这种情况下，构造模式串 $pnext$ 表的工作只须做一次，后面匹配中只须简单地反复使用，这是最适合 KMP 算法地场景
 
 KMP 算法地一个重要优点是执行中不回溯，这种性质在一些实际应用中特别有价值，因为它支持一边读入一边匹配，不回头重读就不需要保存被匹配的串。在处理从外部（外存/网络等）获取的大量信息时，这种 算法非常合适
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
